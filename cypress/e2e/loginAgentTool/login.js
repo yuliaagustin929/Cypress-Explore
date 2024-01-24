@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import loginPage from '../../../pom/loginPage'; 
+import loginPage from '../../pom/loginPage'; 
 // import { loginAgentUI } from '@e2e/agency-agenttool/commonAction';
 
 Given(`Agent access agent tool {string} page`, (pageName) => {
