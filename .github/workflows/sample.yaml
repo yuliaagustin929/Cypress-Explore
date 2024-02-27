@@ -1,10 +1,8 @@
-name: Cypress Tests Exercise
-
+name: End-to-end Tests
 on:
   push:
     branches:
       - master
-
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
@@ -15,5 +13,3 @@ jobs:
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v6
-        with:
-          spec: cypress/e2e/contactList/contactList.feature
