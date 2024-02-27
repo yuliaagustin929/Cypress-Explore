@@ -1,15 +1,20 @@
-name: End-to-end Tests
+name: Cypress test exercise 
+
 on:
   push:
     branches:
       - master
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
+        with:
+          browser: electron
+          start: npx cypress run --spec cypress/e2e/contactList/contactList.feature
