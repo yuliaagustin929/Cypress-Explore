@@ -30,4 +30,4 @@ jobs:
         run: npm install
 
       - name: Run Cypress tests
-        run: npm run cy:run -- --spec "cypress/e2e/contactList/*.feature"
+        run: npx cypress run --browser electron --spec cypress/e2e/contactList/contactList.feature
