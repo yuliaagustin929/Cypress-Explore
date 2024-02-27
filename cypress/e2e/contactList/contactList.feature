@@ -13,4 +13,3 @@ Feature: contact list
     Examples: 
     | email                    | password             |
     | yulia@gmail.com          | tester123            |
-    | update@gmail.com     | testing123                 |
