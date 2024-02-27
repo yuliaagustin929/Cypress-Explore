@@ -17,6 +17,10 @@ module.exports = defineConfig({
   e2e: {
     specPattern: ["**/*.{spec.js,feature}", "**/*.cy.{js,jsx,ts,tsx}"],
     setupNodeEvents,
+    zephyrTestCycleKey: {
+      // use projectKey as attribute name, example BA: "BA-R14"
+      BAAT: 'BAAT-R12'
+    }
   },
   chromeWebSecurity: false
 });
