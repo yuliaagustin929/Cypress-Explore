@@ -16,6 +16,9 @@ jobs:
       - name: setup env
         run: echo '${{ secrets.CYPRESS_ENV }}' > cypress.env.json
 
+      - name: debug
+        run: cat cypress.env.json
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
