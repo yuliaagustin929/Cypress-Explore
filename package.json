@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "agency": "npx cypress run --spec cypress/e2e/contactList/contactList.feature"
+    "agency": "npx cypress run --spec cypress/e2e/contactList/contactList.feature",
     "echo": "echo 'Hello world'"
   },
   "keywords": [],
