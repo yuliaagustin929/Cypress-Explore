@@ -1,9 +1,13 @@
 name: Cypress test exercise 
-
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
+    branches: [master]
+    inputs:
+      type:
+        description: 'Echo or Agency'
+        required: true
+        default: ''
+
 
 jobs:
   cypress-run:
@@ -31,4 +35,4 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           browser: electron
-          start: npx cypress run --spec cypress/e2e/contactList/contactList.feature
+          command: npm run ${{ inputs.type }}
