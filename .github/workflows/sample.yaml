@@ -24,7 +24,7 @@ jobs:
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
           # end of optional handling for multi line json
-          echo "::set-output name=packageJson::$content"
+          echo "$content" >> $GITHUB_OUTPUT
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
