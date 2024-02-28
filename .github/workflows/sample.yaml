@@ -15,8 +15,6 @@ jobs:
 
       - name: setup env
         run: echo '${{ secrets.CYPRESS_ENV }}' > cypress.env.json
-      - name: echo env
-        run: echo ${{secrets.CYPRESS_ENV}}
 
       - name: debug
         run: |
