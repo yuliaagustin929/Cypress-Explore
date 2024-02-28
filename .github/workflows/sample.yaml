@@ -14,17 +14,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: setup env
-        run: echo '${{ secrets.CYPRESS_ENV }}' > cypress.env.json
+        run: echo '${{ vars.VAR_CYPRESS_ENV }}' > cypress.env.json
 
-      # - name: debug
-      #   run: |
-      #     content=`cat ./cypress.env.json`
-      #     # the following lines are only required for multi line json
-      #     content="${content//'%'/'%25'}"
-      #     content="${content//$'\n'/'%0A'}"
-      #     content="${content//$'\r'/'%0D'}"
-      #     # end of optional handling for multi line json
-      #     echo "$content" >> $GITHUB_OUTPUT
+      - name: debug
+        run: echo '${{ vars.VAR_CYPRESS_ENV }}'
+        # |
+        #   content=`cat ./cypress.env.json`
+        #   # the following lines are only required for multi line json
+        #   content="${content//'%'/'%25'}"
+        #   content="${content//$'\n'/'%0A'}"
+        #   content="${content//$'\r'/'%0D'}"
+        #   # end of optional handling for multi line json
+        #   echo "$content" >> $GITHUB_OUTPUT
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
