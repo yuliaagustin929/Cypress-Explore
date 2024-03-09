@@ -1,0 +1,33 @@
+name: Cypress test exercise 
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: setup env
+        run: echo '${{ secrets.CYPRESS_ENV }}' > cypress.env.json
+
+      # - name: debug
+      #   run: |
+      #     content=`cat ./cypress.env.json`
+      #     # the following lines are only required for multi line json
+      #     content="${content//'%'/'%25'}"
+      #     content="${content//$'\n'/'%0A'}"
+      #     content="${content//$'\r'/'%0D'}"
+      #     # end of optional handling for multi line json
+      #     echo "$content" >> $GITHUB_OUTPUT
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          browser: electron
+          start: npx cypress run --spec cypress/e2e/contactList/contactList.feature
