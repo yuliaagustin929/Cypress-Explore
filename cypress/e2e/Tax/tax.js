@@ -4,24 +4,38 @@ import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import loginPage from '../../pom/loginPage'; 
 import { loginAgentUI } from '../commonAction';
 
-Given(`Agent access agent tool {string} page`, (pageName) => {
-  cy.viewport('iphone-xr');
-  cy.intercept({
-    method: 'GET',
-    url: 'https://orientasi.sit.bravo.bfi.co.id/assets/locales/en/translation.json*'
-  }).as('homePage');
-  if (pageName == 'home') {
-    cy.visit({
-      url: `${Cypress.env('agency-agenttools').baseUrl}`,
+Given(`Agent access agent tool {string} page`, async (pageName) => {
+  try {
+    cy.viewport('iphone-xr');
+    
+    // Intercept the GET request for translation.json
+    cy.intercept({
+      method: 'GET',
+      url: 'https://orientasi.sit.bravo.bfi.co.id/assets/locales/en/translation.json*'
+    }).as('homePage');
+
+    // Visit the specified page
+    let url;
+    if (pageName === 'home') {
+      url = Cypress.env('agency-agenttools').baseUrl;
+    } else {
+      url = `${Cypress.env('agency-agenttools').baseUrl}/${pageName}`;
+    }
+    
+    await cy.visit({
+      url: url,
       failOnStatusCode: false
     });
-  } else {
-    cy.visit({
-      url: `${Cypress.env('agency-agenttools').baseUrl}/${pageName}`,
-      failOnStatusCode: false
-    });
+
+    // Wait for the home page interception
+    await cy.wait('@homePage');
+  } catch (error) {
+    // Handle any errors
+    console.error('Error accessing agent tool page:', error);
+    throw error; // Rethrow the error to fail the test
   }
 });
+
 
 When(`Agent login with {string} credentials`, (phoneNumber) => {
   cy.wait('@homePage');

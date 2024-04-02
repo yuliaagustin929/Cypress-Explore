@@ -1,7 +1,7 @@
-@ProjectKey-BAAT
+# @ProjectKey-BAAT
 Feature: contact list
 
-  @BAAT-T1458
+  # @BAAT-T1458
   Scenario Outline: login and verify contact list
     Given User visit contact list app 
     When User input "<email>" email 
