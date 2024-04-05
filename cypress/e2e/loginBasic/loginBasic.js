@@ -1,37 +1,43 @@
-import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor'
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-Given('Agent access Agent tools home page', () => {
+Given('Agent access agent tools homepage', ()=>{
     cy.viewport('iphone-xr');
     cy.visit({
-      url: Cypress.env('agency-agenttools').baseUrl,
-      failOnStatusCode: false
+        url:'https://orientasi.sit.bravo.bfi.co.id/',
+        failOnStatusCode: false
     });
-  });
-  
-  When('Agent click login button', () => {
+}
+);
+
+When('Agent click login button', ()=> {
     cy.get('#loginButton').click();
-  });
-  
-  When('Agent input valid active phone number', () => {
-    cy.get('[data-testid="mobile_phone"]').clear().type(Cypress.env('agency-agenttools').phoneActiveBravo);
-  });
-  
-  When('Agent click Konfirmasi button', () => {
+});
+
+When('Agent input string {string} phone number', ()=> {
+    cy.get('#mobile_phone').type('866433665526')
+
+});
+
+When('Agent click konfirmasi button', ()=> {
     cy.get('#sendLoginCodeButton').click();
-  });
-  
-  When('Agent input OTP', () => {
-    cy.get('[data-testid="otp1"]').type(1);
-    cy.get('[data-testid="otp2"]').type(1);
-    cy.get('[data-testid="otp3"]').type(1);
-    cy.get('[data-testid="otp4"]').type(1);
-  });
-  
-  When('Agent click konfirmasi button', () => {
+}
+);
+
+When('Agent input OTP ', ()=>{
+    cy.get('#otp1').type('1')
+    cy.get('#otp2').type('1')
+    cy.get('#otp3').type('1')
+    cy.get('#otp4').type('1')
+
+});
+
+When('Agent click konfirmasi button', ()=>{
     cy.get('#verificationConfirmButton').click();
-  });
-  
-  Then('Agent should be able to see lounge', () => {
-    cy.wait(1000);
-    cy.get('[data-testid="goto-beranda"]').should('be.visible');
-  });
+
+});
+
+Then('Agent should be able to see lounge', ()=>{
+    cy.url().should('include','https://orientasi.sit.bravo.bfi.co.id/lounge')
+
+});
+
