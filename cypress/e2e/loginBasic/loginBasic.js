@@ -15,3 +15,7 @@ When('Agent click login button', () =>{
 When('Agent input valid phone number ', () =>{
     cy.get('[#data-testid="mobile_phone"]').click();
 })
+
+When('Agent input valid phone number ', () =>{
+    cy.get('[#data-testid="mobile_phone"]').click();
+})
