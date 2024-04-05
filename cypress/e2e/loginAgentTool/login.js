@@ -76,19 +76,21 @@ When(`Agent login as {string} Agent`, (phoneNumber) => {
 
   When(`Agent Click ubah npwp`, () => {
     //cy.wait('@homePage');
-    cy.get('[class="bravo-wrapper-863 bravo-wrapper-d11-1376"]').click();
+    cy.get('button:contains("Ubah")').click()
    
   });
 
   When(`Agent input with {string} npwp number`, (npwpNumber) => {
-    cy.wait('@homePage');
-    cy.get('[data-testid="mobile_phone"]').type(npwpNumber);
+    //cy.wait('@homePage');
+    cy.get('[data-testid="no_npwp"]').type(0).clear();
+    cy.get('[data-testid="no_npwp"]').type(npwpNumber);
         
       
   });
 
   Then(`Agent can see {string} must input valid npwp number`, (message) => {
-    cy.get('data-testid="form-error-no_npwp').should('have.text', message);
+    
+    cy.get('[data-testid="form-error-no_npwp"]').should('have.text', message);
     
   });
 
