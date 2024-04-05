@@ -1,41 +1,37 @@
-import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import { Given, When, Then} from "@badeball/cypress-cucumber-preprocessor";
 
-Given('Agent access agent tools home page', () => {
-    cy.viewport('iphone-xr'); 
-    cy.visit({
+Given ('Agent access link web Agent Tools', () =>{
+    cy.viewport('iphone-xr');
+    cy.visit ({
         url: 'https://orientasi.sit.bravo.bfi.co.id/', 
         failOnStatusCode: false
     });
 });
 
-
-When('Agent click login button', () => {
+When ('Agent click login button', () =>{
     cy.get('#loginButton').click();
 });
 
-When('Agent click konfirmasi button', () => {
-    cy.get('#sendLoginCodeButton').click()
-})
-
-When('Agent input {string} phone number', (phoneNumber) => {
+When ('Agent input {string} phone number', (phoneNumber) => {
     cy.get('[data-testid="mobile_phone"]').clear().type(phoneNumber);
-})
+});
 
-When('Agent input OTP', () => {
-    cy.get('[data-testid="otp1"]').type('1');
-    cy.get('[data-testid="otp2"]').type('1');
-    cy.get('[data-testid="otp3"]').type('1');
-    cy.get('[data-testid="otp4"]').type('1');
-})
+When ('Agent click button konfirmasi', () => {
+    cy.get('#sendLoginCodeButton').click();
+});
 
+When ('Agent input OTP', () => {
+    cy.get('#otp1').type('1');
+    cy.get('#otp2').type('1');
+    cy.get('#otp3').type('1');
+    cy.get('#otp4').type('1');
+}); 
 
-When('Agent click konfirmasi button Otp', () => {
+When ('Agent click konfirmasi button', () => {
     cy.get('#verificationConfirmButton').click();
-})
+});
 
-
-When('Agent should be able to see lounge', () => {
-    cy.wait(1000);
-    cy.get('[data-testid="goto-beranda"]').should('be.visible');
-    cy.url().should('eq', 'https://orientasi.sit.bravo.bfi.co.id/lounge');
+Then ('Agent should be able to see lounge page', () => {
+    cy.wait (1000);
+    cy.get('[data-testid="footer-toolbar-menu"]').should('be.enabled');
 });

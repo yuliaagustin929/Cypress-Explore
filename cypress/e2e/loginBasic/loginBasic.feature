@@ -1,10 +1,20 @@
-Feature: Login Basic 
+Feature: Login feature
 
-    Scenario: Succesfully logged in with valid phone number
-    Given Agent access agent tools home page
-    When Agent click login button 
-    And Agent input '866433665526' phone number 
-    And Agent click konfirmasi button 
-    And Agent input OTP 
-    And Agent click konfirmasi button Otp
-    Then Agent should be able to see lounge
+    Background:
+        Given Agent access agent tool 'home' page
+
+    Scenario Outline: [Login] Successfully logged in with active account 
+        When Agent login with '866433277757' credentials
+        Then Agent should be able to see lounge page
+
+    Scenario Outline: Login Validation
+        When Agent login with "<phoneNumber>" phone number
+        Then Agent can see "<message>" must input valid phone number
+
+        Examples:
+        | phoneNumber       | message                           |
+        |                   | Masukkan Nomor Telepon            |
+        | 89854656576876    | Maksimal 14 digit                 |
+        | 89656             | Minimal 10 digit                  |
+        | 79656764567       | Masukkan Nomor Ponsel yang valid  |
+
