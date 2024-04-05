@@ -22,7 +22,6 @@ When('Agent input OTP',() =>{
     cy.get('#otp2').type('1');
     cy.get('#otp3').type('1');
     cy.get('#otp4').type('1');
-    
 })
 
 When('Agent click konfirmasi button otp',() =>{
@@ -30,8 +29,8 @@ When('Agent click konfirmasi button otp',() =>{
 })
 
 Then ('Agent should be able to see lounge',() =>{
-    cy.intercept('GET', '**/onboarding/v2/agent/profile').as('loungePage');
-    cy.wait('@loungePage');
-    //cy.get('search-customer-name-static')
-    //test
+    //cy.intercept('GET', '**/onboarding/v2/agent/profile').as('loungePage');
+    //cy.wait('@loungePage');
+    cy.get('search-customer-name-static')
 })
+

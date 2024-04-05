@@ -1,4 +1,5 @@
 Feature: Login Basic 
+
     Scenario: Succesfully logged in with valid phone number
     Given Agent access agent tools home page
     When Agent click login button 
@@ -7,3 +8,4 @@ Feature: Login Basic
     And Agent input OTP 
     And Agent click konfirmasi button otp
     Then Agent should be able to see lounge
+
