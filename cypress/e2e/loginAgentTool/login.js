@@ -1,6 +1,8 @@
 /// <reference types="Cypress" />
 
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import loginPage from '../../pom/loginPage'; 
+import LoungePage  from '../../pom/lounge';
 import { loginAgentUI } from '../commonAction';
 
 Given(`Agent access agent tool {string} page`, (pageName) => {
@@ -24,24 +26,26 @@ Given(`Agent access agent tool {string} page`, (pageName) => {
 
 When(`Agent login with {string} credentials`, (phoneNumber) => {
   cy.wait('@homePage');
-  cy.get('#loginButton', { timeout: 17000 }).click();
-  cy.get('[data-testid="mobile_phone"]').clear().type(phoneNumber);
-  cy.get('#sendLoginCodeButton').click();
-  cy.get('[data-testid="otp1"]').type(1);
-  cy.get('[data-testid="otp2"]').type(1);
-  cy.get('[data-testid="otp3"]').type(1);
-  cy.get('[data-testid="otp4"]').type(1);
-  cy.get('#verificationConfirmButton').click();
+  loginPage.loginButton().click();
+  if (phoneNumber === 'active') {
+    loginPage.phoneNumberField().clear().type('866433277757');
+  } 
+  loginPage.sendVerifiCodeButton().click();
+  loginPage.inputOtp1().type(1);
+  loginPage.inputOtp2().type(1);
+  loginPage.inputOtp3().type(1);
+  loginPage.inputOtp4().type(1);
+  loginPage.sendVerifiConfirmButton().click();
   cy.intercept('GET', '**/onboarding/v2/agent/profile').as('loungePage');
 });
 
 When(`Agent login with {string} phone number`, (phoneNumber) => {
   cy.wait('@homePage');
-  cy.get('#loginButton', { timeout: 17000 }).click();
+  loginPage.loginButton().click();
     if (phoneNumber === '') {
-      cy.get('[data-testid="mobile_phone"]').type(0).clear();
+      loginPage.phoneNumberField().type(0).clear();
     } else {
-      cy.get('[data-testid="mobile_phone"]').type(phoneNumber);
+      loginPage.phoneNumberField().type(phoneNumber);
     }
 });
 
@@ -51,14 +55,14 @@ Then(`Agent should be able to see lounge page`, () => {
 });
 
 Then(`Agent can see {string} must input valid phone number`, (message) => {
-  cy.get('[data-testid="form-error-mobile_phone"]').should('have.text', message);
-  cy.get('#sendLoginCodeButton').should('be.disabled');
+  loginPage.errorMessage().should('have.text', message);
+  loginPage.sendVerifiCodeButton().should('be.disabled');
 });
 
-When(`Agent login as {string} Agent`, (phoneNumber) => {
+When(`Agent login as {string} Agent`, (agentType) => {
     cy.wait('@homePage');
     cy.intercept('GET', '**/onboarding/v2/agent/profile').as('loungePage');
-    loginAgentUI(phoneNumber);
+    loginAgentUI(Cypress.env('agency-agenttools')[agentType].phone);
     cy.wait('@loungePage');
   });
 
