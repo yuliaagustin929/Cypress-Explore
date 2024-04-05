@@ -63,3 +63,36 @@ When(`Agent login as {string} Agent`, (phoneNumber) => {
   });
 
 
+  When(`Agent Click Account Akun`, () => {
+    //cy.wait('@homePage');
+    cy.get('[data-testid="goto-akun"]').click();
+   
+  });
+  When(`Agent Click Informasi npwp`, () => {
+    //cy.wait('@homePage');
+    cy.get('#goToNPWPInformationButton').click()
+   
+  });
+
+  When(`Agent Click ubah npwp`, () => {
+    //cy.wait('@homePage');
+    cy.get('[class="bravo-wrapper-863 bravo-wrapper-d11-1376"]').click();
+   
+  });
+
+  When(`Agent input with {string} npwp number`, (npwpNumber) => {
+    cy.wait('@homePage');
+    cy.get('[data-testid="mobile_phone"]').type(npwpNumber);
+        
+      
+  });
+
+  Then(`Agent can see {string} must input valid npwp number`, (message) => {
+    cy.get('data-testid="form-error-no_npwp').should('have.text', message);
+    
+  });
+
+
+
+
+
