@@ -4,7 +4,7 @@ Feature: Login feature
         Given Agent access agent tool 'home' page
 
     Scenario Outline: [Login] Successfully logged in with active account 
-        When Agent login with '866433277757' credentials
+        When Agent login with 'active' credentials
         Then Agent should be able to see lounge page
 
     Scenario Outline: Login Validation
