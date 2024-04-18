@@ -2,7 +2,7 @@
 
 export default class LoginPage {
     static loginButton() {
-      return cy.get('#loginButton', { timeout: 17000 });
+      return cy.get('#loginButton').click();
     }
     static phoneNumberField() {
       return cy.get('[data-testid="mobile_phone"]');
@@ -25,20 +25,11 @@ export default class LoginPage {
     static sendVerifiConfirmButton() {
       return cy.get('#verificationConfirmButton');
     }
-    static popUpUnregisteredTitle() {
-      return cy.get('[data-testid="popup-modal-header-error"]');
-    }
-    static popUpUnregisteredBody() {
-      return cy.get('[data-testid="popup-message"]');
-    }
-    static popUpUnregisteredDaftarkanButton() {
-      return cy.get('[data-testid="popup-modal-custom-button"]').find('button');
-    }
-    static popUpUnregisteredCloseButton() {
-      return cy.get('[data-testid="close-button"]');
-    }
     static errorMessage() {
       return cy.get('[data-testid="form-error-mobile_phone"]');
+    }
+    static loungeBar() {
+      return  cy.get('[data-testid="footer-toolbar-menu"]');
     }
   }
   

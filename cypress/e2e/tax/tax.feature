@@ -1,16 +1,22 @@
-Feature: Tax feature
+Feature: info NPWP
 
-    Background:
-        Given Agent access agent tool 'home' page
+Background:
+    Given Agent access web Agent Tools
+    When Agent login with valid phone number
+    When Agent click akun button
+    And Agent click informasi NPWP button
+    And Agent click ubah button
 
-    Scenario Outline: [Tax] Validate form input tax number while toggle off  
-        When Agent login as "866433665526" Agent
-        And Agent access account page
-        And Agent click Informsi NPWP menu
-        And Agent click Ubah button 
-        Then Agent input "<npwpNumber>" number and validate error "<message>"
+Scenario Outline: Successfully input valid npwp
+    And Agent input "363104621003000" npwp
+    Then Agent success save npwp
 
-        Examples: 
-        |npwpNumber| message |
-        |           | Masukkan NPWP | 
-        |88787      |NPWP harus 15 digit|
+Scenario Outline: Handle Message Error informasi NPWP 
+    And Agent input "<npwp>" npwp
+    Then Agent can see "<message>" must input valid npwp
+
+Examples:
+|npwp| message |
+||Masukkan NPWP|
+|525252|NPWP harus 15 digit|
+
