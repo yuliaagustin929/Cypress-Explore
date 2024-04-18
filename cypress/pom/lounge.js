@@ -122,5 +122,18 @@ export default class LoungePage {
     static imageBanner(){ 
       return cy.get('[data-testid="image-viewer"]');
     }
+    static searchCustomer(){ 
+        return cy.get('[data-testid="search-customer-name-static"]');
+      }
+
+    static searchCustomerName(){ 
+        return cy.get('[data-testid="search-customer-name"]');
+    }
+    static searchCustomerBackBtn() {
+        return cy.get('[data-testid="serach-customer-back-button"]');
+    }
+    static loungeMenu() {
+        return cy.get('[class*="bravo-loungeMenuItem"]')
+    }
   }
   

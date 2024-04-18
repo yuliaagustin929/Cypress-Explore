@@ -59,10 +59,10 @@ Then(`Agent can see {string} must input valid phone number`, (message) => {
   loginPage.sendVerifiCodeButton().should('be.disabled');
 });
 
-When(`Agent login as {string} Agent`, (agentType) => {
+When(`Agent login as {string} Agent`, (phoneNumber) => {
     cy.wait('@homePage');
     cy.intercept('GET', '**/onboarding/v2/agent/profile').as('loungePage');
-    loginAgentUI(Cypress.env('agency-agenttools')[agentType].phone);
+    loginAgentUI(phoneNumber);
     cy.wait('@loungePage');
   });
 
