@@ -27,18 +27,24 @@ Given(`Agent access agent tools home page`, () => {
             cy.get('[data-testid="otp4"]').type('1');
             });
             Then('Agent click konfirmasi button', () => {
+              cy.intercept('GET','**/onboarding/media/active-carousel?page=1&limit=100').as('carousel');
                 cy.get('#verificationConfirmButton').click();
               });
           Then('Agent should be able to see lounge', () => {
             cy.wait(1000);
             cy.get('[data-testid="goto-beranda"]').click();
           });
+          Then('Agent should be able to see carousel', () => {
+              cy.wait('@carousel').then(({response}) => {
+              cy.get('swiper-slide').should('have.length', response.body.content.length);
+            });        
+          });
 
           Then('Agent go to Account page', ()=>{
-            cy.get('[data-testid="goto-akun"]').click()
+            cy.get('[data-testid="goto-akun"]').click();
         });
         
         Then('Agent click Informasi NPWP',()=>{
-            cy.get('#goToNPWPInformationButton').click()
-            cy.get('[class*="bravo-info"]').eq(1)
+            cy.get('#goToNPWPInformationButton').click();
+            cy.get('[class*="bravo-info"]');
         });

@@ -8,5 +8,6 @@ Feature: Login Basic
     And Agent input OTP 
     And Agent click konfirmasi button 
     Then Agent should be able to see lounge
+    And Agent should be able to see carousel
     And Agent go to Account page
     And Agent click Informasi NPWP
