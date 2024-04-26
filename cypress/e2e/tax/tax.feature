@@ -8,9 +8,9 @@ Feature: Tax feature
         And Agent access account page
         And Agent click Informsi NPWP menu
         And Agent click Ubah button 
-        Then Agent input "<npwpNumber>" number and validate error "<message>"
+        Then Agent input "<npwpNo>" number and validate error "<message>"
 
         Examples: 
-        |npwpNumber| message |
-        |           | Masukkan NPWP | 
-        |88787      |NPWP harus 15 digit|
+        | npwpNo    | message               |
+        |           | Masukkan NPWP         | 
+        |812345     | NPWP harus 15 digit   |

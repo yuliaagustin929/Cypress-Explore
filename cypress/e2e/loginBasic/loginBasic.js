@@ -1,4 +1,6 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import loginPage from "../../pom/loginPage.js"
+import LoungePage from "../../pom/lounge/loungePage.js";
 
 Given('Agent access agent tools home page', () => {
     cy.viewport('iphone-xr'); 
@@ -10,32 +12,26 @@ Given('Agent access agent tools home page', () => {
 
 
 When('Agent click login button', () => {
-    cy.get('#loginButton').click();
+    loginPage.loginButton().click();
 });
 
 When('Agent click konfirmasi button', () => {
-    cy.get('#sendLoginCodeButton').click()
+    loginPage.sendVerifiCodeButton().click()
 })
 
 When('Agent input {string} phone number', (phoneNumber) => {
-    cy.get('[data-testid="mobile_phone"]').clear().type(phoneNumber);
+    loginPage.phoneNumberField().clear().type(phoneNumber);
 })
 
 When('Agent input OTP', () => {
-    cy.get('[data-testid="otp1"]').type('1');
-    cy.get('[data-testid="otp2"]').type('1');
-    cy.get('[data-testid="otp3"]').type('1');
-    cy.get('[data-testid="otp4"]').type('1');
+    loginPage.inputOtp1().type('1');
+    loginPage.inputOtp2().type('1');
+    loginPage.inputOtp3().type('1');
+    loginPage.inputOtp4().type('1');
 })
 
 
 When('Agent click konfirmasi button Otp', () => {
-    cy.get('#verificationConfirmButton').click();
+    loginPage.sendVerifiConfirmButton().click();
 })
 
-
-When('Agent should be able to see lounge', () => {
-    cy.wait(1000);
-    cy.get('[data-testid="goto-beranda"]').should('be.visible');
-    cy.url().should('eq', 'https://orientasi.sit.bravo.bfi.co.id/lounge');
-});
